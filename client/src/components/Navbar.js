@@ -20,7 +20,7 @@ const Navbar = () => {
     },
     {
       title: "GitHub",
-      path: "https://github.com/mtouseeb0008",
+      path: "https://github.com/mtouseeb0008/webalar_intern_fullstack_attendence",
     },
   ];
 
@@ -46,32 +46,6 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const getUser = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URI}/user`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        login(response.data.user);
-      } else {
-        logoutHandler();
-        login(null);
-      }
-    } catch (error) {
-      logoutHandler();
-      login(null);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
   return (
     <div className=" w-full flex items-center justify-between px-2 py-3 bg-black text-white">
       <h1>Attendance Portal</h1>

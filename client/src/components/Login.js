@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,12 @@ const Login = (props) => {
   const { user, login, logout } = useAuth();
 
   const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    login(null);
+    navigate("/login");
+  };
 
   const loginHandler = async (e) => {
     try {
@@ -43,6 +49,33 @@ const Login = (props) => {
       }
     }
   };
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URI}/user`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        login(response.data.user);
+      } else {
+        logoutHandler();
+        login(null);
+      }
+    } catch (error) {
+      logoutHandler();
+      login(null);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   if (localStorage.getItem("token")) return <Navigate to="/attendance" />;
 
@@ -86,11 +119,7 @@ const Login = (props) => {
               disabled={loading}
               type="submit"
             >
-              {loading ? (
-                <span className="spinner-border spinner-border-sm"></span>
-              ) : (
-                "Login"
-              )}
+              {loading ? <span>Logging...</span> : "Login"}
             </button>
           </div>
         </form>

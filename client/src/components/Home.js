@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// const Home = () => {
-//   return (
-//     <div>Home</div>
-//   )
-// }
-
-// export default Home
 import React from "react";
 // import backgroundImage from "./photo.png"; // Adjust the path accordingly
 import backgroundImage from "./photoatten.png";
