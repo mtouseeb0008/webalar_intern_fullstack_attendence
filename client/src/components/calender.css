@@ -1,0 +1,7 @@
+.react-calendar__tile--missed {
+  background-color: #ffcccc; /* Light red */
+}
+
+.react-calendar__tile--present {
+  background-color: #ccffcc; /* Light green */
+}
