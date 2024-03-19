@@ -119,7 +119,7 @@ const Login = (props) => {
               disabled={loading}
               type="submit"
             >
-              {loading ? <span>Logging...</span> : "Login"}
+              {loading ? <span>"Logging..."</span> : "Login"}
             </button>
           </div>
         </form>
