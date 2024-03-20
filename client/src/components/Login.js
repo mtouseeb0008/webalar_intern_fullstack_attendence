@@ -33,7 +33,7 @@ const Login = (props) => {
 
       console.log(response);
 
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response);
         const { message, user, token } = response.data;
         login(user);
@@ -89,7 +89,7 @@ const Login = (props) => {
         />
         <form onSubmit={loginHandler} className="px-4">
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email</label>
             <input
               type="text"
               className="border rounded-md px-3 py-2 mt-1 mb-5 focus:outline-none focus:ring focus:border-blue-300 w-full"
